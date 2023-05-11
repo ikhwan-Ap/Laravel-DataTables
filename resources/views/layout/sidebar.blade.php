@@ -19,10 +19,10 @@
 <div class="main-sidebar sidebar-style-2">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand" style="line-height: 30px">
-      <a href="/">Aplikasi Deteksi Dini Kanker Prostat</a>
+      <a href="/">Laravel DataTables</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="/">KP</a>
+      <a href="/">LD</a>
     </div>
     <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
