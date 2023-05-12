@@ -29,16 +29,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 
 
-  @if ($title == 'Data Skor')
-     <?php  include '../public/js/admin_js/ajax_gejala.blade.php'; ?> 
-  @elseif ($title == 'Data Kriteria')
-     <?php  include '../public/js/admin_js/ajax_kriteria.blade.php'; ?> 
-  @elseif ($title == 'Data User')
+  @if ($title == 'Data User')
      <?php  include '../public/js/admin_js/ajax_user.blade.php'; ?>
-  @elseif ($title == 'Data Aturan')
-     <?php  include '../public/js/admin_js/ajax_aturan.blade.php'; ?>  
-  @elseif ($title == 'Data Proses')
-     <?php  include '../public/js/admin_js/ajax_proses.blade.php'; ?> 
+  @elseif ($title == 'Data User Client Side')
+     <?php  include '../public/js/admin_js/ajax_user_client_side.blade.php'; ?>  
   @endif
 
 

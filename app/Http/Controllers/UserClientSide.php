@@ -13,18 +13,16 @@ class UserClientSide extends Controller
     public function index()
     {
         $data = [
-            'title'        => 'Data User',
+            'title'        => 'Data User Client Side',
         ];
-        return view('admin.user.index', $data);
+        return view('admin.user_client_side.index', $data);
     }
 
     public function get_data()
     {
-        $user = new User();
-        $user->query()->get();
+        $user = User::get();
         $data['users'] = $user;
-        return $data;
-        return view('admin.user_client_side.datalist');
+        return view('admin.user_client_side.datalist', $data);
     }
 
     public function store(Request $request)

@@ -1,5 +1,7 @@
 @foreach($users as $user)
+{{$no = 1;}}
 <tr>
+  <td>{{$no++}}</td>
   <td>{{$user->username}}</td>
   <td>{{$user->email}}</td>
   <td>

@@ -7,7 +7,7 @@
           'X-CSRF-TOKEN': csrf
           }
       });
-      table = $('#table-user').DataTable({
+       table = $('#table-user').DataTable({
                   "processing": true,
                   "serverSide": true,
                   'destroy': true,
@@ -19,8 +19,8 @@
                   "columnDefs": [{
                       "targets": [0],
                   }, ],
-          });
-          $(document).on('click','.btnAdd',function (e) { 
+        });
+      $(document).on('click','.btnAdd',function (e) { 
           e.preventDefault();
           $('#tambah-user').modal('show');
       })

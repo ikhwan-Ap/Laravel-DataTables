@@ -32,6 +32,7 @@
         <li class="menu-header">Master Data</li>
         <li class="nav-item dropdown active">
           <li class="{{$title === 'Data User' ? 'active':''}}"><a class="nav-link" href="/user"><i class="ion-android-person"></i><span>User Server-Side</span></a></li>
+          <li class="{{$title === 'Data User Client Side' ? 'active':''}}"><a class="nav-link" href="/user_client_side"><i class="ion-android-person"></i><span>User Client-Side</span></a></li>
         </li> 
       </ul>
   </aside>
