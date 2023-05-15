@@ -7,7 +7,7 @@
           'X-CSRF-TOKEN': csrf
           }
       });
-       table = $('#table-user').DataTable({
+       table = $('#table-cropper').DataTable({
                   "processing": true,
                   "serverSide": true,
                   'destroy': true,

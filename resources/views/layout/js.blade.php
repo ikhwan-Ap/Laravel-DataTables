@@ -30,9 +30,12 @@
 
 
   @if ($title == 'Data User')
-     <?php  include '../public/js/admin_js/ajax_user.blade.php'; ?>
+     <?=  include '../public/js/admin_js/ajax_user.blade.php'; ?>
   @elseif ($title == 'Data User Client Side')
-     <?php  include '../public/js/admin_js/ajax_user_client_side.blade.php'; ?>  
+     <?=  include '../public/js/admin_js/ajax_user_client_side.blade.php'; ?>  
+   @elseif($title == 'Cropper'){
+      <?= include '../public/js/admin_js/ajax_cropper.blade.php';?>
+   }
   @endif
 
 

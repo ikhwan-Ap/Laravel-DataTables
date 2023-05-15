@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cropper;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserClientSide;
@@ -41,6 +42,15 @@ Route::put('/update_password/{id}', [UserController::class, 'update_password'])-
 Route::post('/user', [UserController::class, 'get_data_user'])->middleware('auth');
 Route::post('/user/create', [UserController::class, 'store'])->middleware('auth');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('auth');
+
+//Route Cropper
+Route::get('/cropper', [Cropper::class, 'index'])->middleware('auth');
+Route::get('/cropper/{id}', [Cropper::class, 'show'])->middleware('auth');
+Route::put('/cropper/{id}', [Cropper::class, 'update'])->middleware('auth');
+Route::put('/update_password/{id}', [Cropper::class, 'update_password'])->middleware('auth');
+Route::post('/cropper', [Cropper::class, 'get_data_cropper'])->middleware('auth');
+Route::post('/cropper/create', [Cropper::class, 'store'])->middleware('auth');
+Route::delete('/cropper/{id}', [Cropper::class, 'destroy'])->middleware('auth');
 
 //Route Login
 Route::resource('/login', LoginController::class);
