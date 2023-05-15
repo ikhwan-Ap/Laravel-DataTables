@@ -77,6 +77,7 @@
               <div class="invalid-feedback">
 
               </div> 
+              <img src="" id="img">
             </div>
           </div>
           <div class="modal-footer bg-whitesmoke br">

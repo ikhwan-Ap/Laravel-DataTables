@@ -96,6 +96,65 @@
               deleteData(id);
           }
       })
+
+      let cropper;
+      let modal = $('#modal');
+      let image = document.getElementById('image');
+      $(document).on('change','#image',function (e) {  
+        e.preventDefault();
+        const tempUrl = URL.createObjectURL(e.target.files[0]);
+        let type = e.target.files[0].type;
+        let size = e.target.files[0].size;
+        var files = event.target.files;
+        let handling =  handlingTypeFile(type,size);
+        if(handling == false){
+            return false;
+        }
+        $('#img').attr('src', tempUrl);
+        URL.revokeObjectURL(e.target.files[0]);
+        var done = function(url) {
+            image.src = url;
+            modal.modal('show');
+        };
+
+        if (files && files.length > 0) {
+            reader = new FileReader();
+            reader.onload = function(event) {
+                done(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+        }
+      })
+      modal.on('shown.bs.modal', function() {
+          cropper = new Cropper(image, {
+              aspectRatio: 216 / 121,
+              viewMode: 1,
+              preview: '.preview'
+          });
+      }).on('hidden.bs.modal', function() {
+          cropper.destroy();
+          cropper = null;
+      });
+
+      $('#crop').click(function() {
+          canvas = cropper.getCroppedCanvas({
+              width: 1500,
+              height: 1500
+          });
+          $("#thumbnail").val('');
+          $('#cover').val('');
+          canvas.toBlob(function(blob) {
+              const img = document.querySelector('#img_thumbnail');
+              img.src = URL.createObjectURL(blob);
+              var reader = new FileReader();
+              reader.readAsDataURL(blob);
+              reader.onloadend = function() {
+                  var base64data = reader.result;
+                  upload = $("#cover").val(base64data);
+              };
+              modal.modal('hide');
+          });
+      });
       function deleteData(id) {
           Swal.fire({
               title: 'Are you sure?',
@@ -155,5 +214,29 @@
               text: `${response.message}`,
           })
       }
+      function handlingTypeFile(type,size) {
+        const allowedFileTypes = [
+            'image/jpg', 'image/jpeg', 'image/png', 'image/JPG','image/JPEG','image/PNG'
+        ];
+        const maxSize = 10485760;
+        if (!allowedFileTypes.includes(type)) {
+            Swal.fire({
+            icon: 'error',
+            title: 'Terjadi kesalahan',
+            text: 'Harap upload file gambar ber-ekstensi jpg, jpeg atau png!',
+            });
+            return false;
+        }
+        if (size > maxSize) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Terjadi kesalahan',
+            text: 'Ukuran maksimal file adalah 10MB!',
+          });
+
+          return false;
+        }
+        return true;
+    }
   })
 </script>
