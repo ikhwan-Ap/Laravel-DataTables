@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-striped" id="table-user" style="width: 100%">
+                  <table class="table table-striped" id="table-cropper" style="width: 100%">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -66,19 +66,21 @@
             </div>
             <div class="form-group col-12">
                 <label for="Description">Description</label>
-                <textarea class="form-control" name="Description" id="Description" cols="30" rows="10" placeholder="Enter Description" required>
-                </textarea>
+                <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Enter Description" required></textarea>
                 <div class="invalid-feedback">
                 </div> 
             </div>
             <div class="form-group col-12">
               <label for="image">Image</label>
-              <input id="image" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" placeholder="Enter Image"  name="image"  required>
+              <input id="image_cropper" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" placeholder="Enter Image"  name="image" >
               <div class="invalid-feedback">
 
               </div> 
-              <img src="" id="img">
             </div>
+            <input type="hidden" id="base_64_cropper" name="base_64_cropper">
+            <div class="form-group" style="margin-bottom:10px;">
+               <img src="" id="img" width="100%">
+           </div>            
           </div>
           <div class="modal-footer bg-whitesmoke br">
             <button type="Submit" class="btn btn-primary">Save</button>
@@ -110,8 +112,7 @@
             </div>
             <div class="form-group col-12">
               <label for="description_up">Description</label>
-              <textarea class="form-control" name="description" id="description_up" cols="30" rows="10" placeholder="Enter Description" required>
-              </textarea>
+              <textarea class="form-control" name="description" id="description_up" cols="30" rows="10" placeholder="Enter Description" required></textarea>
               <div class="invalid-feedback">
 
               </div> 
@@ -133,6 +134,35 @@
       </div>
     </div>
   </div>
+
+  {{-- Form Modal Cropper --}}
+  <div class="modal fade" data-backdrop="false" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="z-index: 9999">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sesuaikan Cover Sebelum Mengunggah</h5>
+                <button type="button" class="btn close" data-dismiss="modal" aria-label="Close" style="padding:0px;">
+                    <span aria-hidden="true" style="font-size: 38px;position: absolute;right: 20px;top: 0px;">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" style="max-height: 400px;">
+                            <img src="" id="sample_image" style="max-height: 400px;" />
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Batal</button>
+                <button type="button" id="crop" class="btn btn-primary">Pilih</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </section>
 

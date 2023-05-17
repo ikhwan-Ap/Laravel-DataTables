@@ -20,8 +20,13 @@
                       }
                   },
                   "columnDefs": [{
-                      "targets": [0],
-                  }, ],
+                    "targets": 3,
+                    "data": "img",
+                    "render": function(url, type, full) {
+                        var img = `<img height="50%" width="50%" src="${full[3]}"/>`;
+                        return img;
+                    }
+                }, ],
         });
       $(document).on('click','.btnAdd',function (e) { 
           e.preventDefault();
@@ -96,64 +101,74 @@
               deleteData(id);
           }
       })
+      // Cropper
+      var cropper;
+      var $modal = $('#modal');
+      var image = document.getElementById('sample_image');
 
-      let cropper;
-      let modal = $('#modal');
-      let image = document.getElementById('image');
-      $(document).on('change','#image',function (e) {  
-        e.preventDefault();
-        const tempUrl = URL.createObjectURL(e.target.files[0]);
-        let type = e.target.files[0].type;
-        let size = e.target.files[0].size;
-        var files = event.target.files;
-        let handling =  handlingTypeFile(type,size);
-        if(handling == false){
+      $('#image_cropper').click(function() {
+            $(this).val(null);
+      });
+
+      $('#image_cropper').change(function(event) {
+          var files = event.target.files;
+          type_file = event.target.files[0].type;
+          size = event.target.files[0].size;
+          let handling = handlingTypeFile(type_file, size)
+          if (handling === false) {
             return false;
-        }
-        $('#img').attr('src', tempUrl);
-        URL.revokeObjectURL(e.target.files[0]);
-        var done = function(url) {
+          }
+          var done = function(url) {
             image.src = url;
-            modal.modal('show');
-        };
+            $modal.modal('show');
+          };
 
-        if (files && files.length > 0) {
+          if (files && files.length > 0) {
             reader = new FileReader();
             reader.onload = function(event) {
                 done(reader.result);
             };
             reader.readAsDataURL(files[0]);
-        }
-      })
-      modal.on('shown.bs.modal', function() {
-          cropper = new Cropper(image, {
+          }
+      });
+
+        var $modal = $('#modal');
+        $modal.on('shown.bs.modal', function() {
+            $('#tambah-cropper').css({
+              'overflow-y': 'auto',
+              'overflow-x': 'hidden'
+            });
+            cropper = new Cropper(image, {
               aspectRatio: 216 / 121,
               viewMode: 1,
               preview: '.preview'
-          });
-      }).on('hidden.bs.modal', function() {
-          cropper.destroy();
-          cropper = null;
-      });
+            });
+        }).on('hidden.bs.modal', function() {
+            $('#tambah-cropper').css({
+            'overflow-y': 'auto',
+            'overflow-x': 'hidden'
+            });
+            cropper.destroy();
+            cropper = null;
+        });
 
       $('#crop').click(function() {
-          canvas = cropper.getCroppedCanvas({
-              width: 1500,
-              height: 1500
-          });
-          $("#thumbnail").val('');
-          $('#cover').val('');
-          canvas.toBlob(function(blob) {
-              const img = document.querySelector('#img_thumbnail');
-              img.src = URL.createObjectURL(blob);
-              var reader = new FileReader();
-              reader.readAsDataURL(blob);
-              reader.onloadend = function() {
-                  var base64data = reader.result;
-                  upload = $("#cover").val(base64data);
-              };
-              modal.modal('hide');
-          });
+        canvas = cropper.getCroppedCanvas({
+        width: 1500,
+        height: 1500
+        });
+        $("#base_64_cropper").val('');
+        canvas.toBlob(function(blob) {
+        const img = document.querySelector('#img');
+        img.src = URL.createObjectURL(blob);
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function() {
+            var base64data = reader.result;
+            upload = $("#base_64_cropper").val(base64data);
+        };
+        $modal.modal('hide');
+        });
       });
       function deleteData(id) {
           Swal.fire({

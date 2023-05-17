@@ -17,3 +17,4 @@ yarn-error.log
 /public/node_modules
 /public/css/toastr
 .env.example
+/public/img/cropper/

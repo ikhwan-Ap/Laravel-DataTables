@@ -20,6 +20,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('')}}css/style.css">
   <link rel="stylesheet" href="{{asset('')}}css/components.css">
+  <link rel="stylesheet" href="{{asset('')}}node_modules/cropperjs/dist/cropper.css">
   {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
    --}}
   <link
